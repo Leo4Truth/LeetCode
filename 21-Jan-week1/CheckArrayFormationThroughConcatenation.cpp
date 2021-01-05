@@ -38,6 +38,31 @@ public:
         
         return sum == map.size();
     }
+
+    // Solution
+    bool canFormArray(vector<int>& arr, vector<vector<int>>& pieces) {
+        int n = arr.size();
+        int m = pieces.size();
+        vector<bool> used(m, false);
+        
+        int i = 0;
+        while (i < n) {
+            bool found = false;
+            for (int j = 0; j < m; j++) {
+                if (!used[j] && arr[i] == pieces[j][0]) {
+                    found = true;
+                    for (int k = 0; k < pieces[j].size(); k++) {
+                        if (arr[i] != pieces[j][k]) return false;
+                        i++;
+                    }
+                    used[j] = true;
+                }
+            }
+            if (!found) return false;
+        }
+        
+        return true;
+    }
 };
 
 int main() {
