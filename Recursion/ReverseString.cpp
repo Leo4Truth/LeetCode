@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < str.length(); i++) s.push_back(str[i]);
 
     Solution solution;
-    solution.reverseString(s);
+    solution.reverseString_2ptr(s);
     for (int i = 0; i < str.length(); i++) cout << s[i];
     cout << endl;
 
