@@ -4,6 +4,8 @@
         "unordered_map": "cpp",
         "iostream": "cpp",
         "*.tcc": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "unordered_set": "cpp",
+        "ostream": "cpp"
     }
 }
