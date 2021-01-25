@@ -9,5 +9,6 @@
         "ostream": "cpp",
         "queue": "cpp",
         "deque": "cpp"
-    }
+    },
+    "python.pythonPath": "C:\\Python39\\python.exe"
 }

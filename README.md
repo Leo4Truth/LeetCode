@@ -1,2 +1,3 @@
-# LeetCodeChallenge
-repo for LeetCode Challenge and Contest
+# LeetCode
+repo for LeetCode Problems
+
