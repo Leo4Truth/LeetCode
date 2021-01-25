@@ -6,6 +6,8 @@
         "*.tcc": "cpp",
         "vector": "cpp",
         "unordered_set": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "queue": "cpp",
+        "deque": "cpp"
     }
 }
