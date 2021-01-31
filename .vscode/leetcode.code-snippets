@@ -10,7 +10,7 @@
 		"prefix": "leetcode",
 		"body": [
 			"#include <iostream>",
-			"#include <vector>",     //这个头文件可以删除，我为了使用方便就加了
+			"#include <vector>",
 			"", //空行
 			"using namespace std;", //标准命名空间
 			"",
