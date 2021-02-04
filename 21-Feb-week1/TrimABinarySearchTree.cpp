@@ -24,20 +24,5 @@ public:
         root->right = trimBST_rec(root->right, low, high);
         return root;
     }
-
-    TreeNode* trimBST_dfs(TreeNode* root, int low, int high) {
-        if (root == nullptr) return root;
-
-        stack<TreeNode*> stk;
-
-        stk.push(root);
-        while (!stk.empty()) {
-            TreeNode* current = stk.top();
-            stk.pop();
-            if (current->val > high) {
-                
-            }
-        }
-    }
 };
 
