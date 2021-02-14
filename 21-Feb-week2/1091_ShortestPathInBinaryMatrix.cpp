@@ -66,7 +66,8 @@ public:
         while (!q.empty()) {
             int size = q.size(); 
             for (int i = 0; i < size; i++) {
-                const auto [x, y] = q.front();
+                int x = q.front().first;
+                int y = q.front().second;
                 q.pop();
                 if (x == m - 1 && y == n - 1) return step;
                 for (int j = 0; j < 8; j++) {
@@ -175,7 +176,7 @@ int main(int argc, char* argv[]) {
     }
 
     Solution1291 solution;
-    cout << solution.shortestPathBinaryMatrix(grid) << endl;
+    cout << solution.shortestPathBinaryMatrix_bfs_without_overwriting_input(grid) << endl;
 
     //system("pause");
     return 0;
