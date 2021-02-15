@@ -23,6 +23,6 @@ int main(int argc, char* argv[]) {
 
     Solution solution;
 
-    system("pause");
+    //system("pause");
     return 0;
 }
