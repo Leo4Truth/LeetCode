@@ -10,5 +10,5 @@
         "queue": "cpp",
         "deque": "cpp"
     },
-    "python.pythonPath": "C:\\Python39\\python.exe"
+    "python.pythonPath": "/usr/bin/python3"
 }
