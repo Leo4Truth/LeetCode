@@ -1,0 +1,95 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+//Definition for singly-linked list.
+struct ListNode {
+	int val;
+	ListNode* next;
+	ListNode(int x) : val(x), next(NULL) {}
+};
+
+class Solution25 {
+public:
+	ListNode* reverseKGroup(ListNode* head, int k) {
+		// return if there is less than k nodes in the list
+		int i = 0;
+		for (ListNode* p = head; i < k; p = p->next, i++) if (!p) return head;
+
+		ListNode* prev = NULL;
+		ListNode* next = head;
+		do {
+			stack<ListNode*> stk;
+
+			// push k nodes into stack as a block
+			i = 0;
+			for (ListNode* p = next; i < k; p = p->next, i++) {
+				if (p) stk.push(p);
+				else return head; // return if there is not enough nodes remain
+				if (i == k - 1) next = p->next; // record the next node of the block
+			}
+
+			// the first block
+			if (!prev) head = stk.top();
+
+			// reverse the nodes in the block
+			while (!stk.empty()) {
+				ListNode* p = stk.top();
+
+				// link the previous block to the current block
+				if (prev && stk.size() == k) prev->next = p;
+				
+				stk.pop();
+
+				// if the node is the last one in the block, record the tail pointer as prev
+				if (stk.empty()) {
+					p->next = next;
+					prev = p;
+				}
+				else p->next = stk.top();
+			}
+		} while (true);
+
+		return head;
+	}
+};
+
+int main25() {
+	Solution25 solution;
+	int n, k;
+	ListNode* head = NULL;
+	ListNode* current = NULL;
+	ListNode* prev = NULL;
+	int x;
+
+	cout << "input length of the list:" << endl;
+	cin >> n;
+	cout << "input n elements of the list:" << endl;
+	for (int i = 0; i < n; i++) {
+		cin >> x;
+		if (!head) {
+			head = new ListNode(x);
+			prev = head;
+		}
+		else {
+			current = new ListNode(x);
+			prev->next = current;
+			prev = current;
+		}
+	}
+	cout << "input k:" << endl;
+	cin >> k;
+
+	ListNode* h = solution.reverseKGroup(head, k);
+	for (ListNode* p = h; p; p = p->next) {
+		cout << p->val;
+		if (p->next) cout << ", ";
+		else cout << endl;
+	}
+
+	system("pause");
+
+	return 0;
+}

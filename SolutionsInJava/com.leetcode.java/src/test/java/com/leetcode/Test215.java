@@ -29,5 +29,4 @@ public class Test215 {
         assert(res == 3);
         System.out.println(res);
     }
-    
 }
