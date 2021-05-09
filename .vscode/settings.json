@@ -8,7 +8,9 @@
         "unordered_set": "cpp",
         "ostream": "cpp",
         "queue": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "string_view": "cpp",
+        "new": "cpp"
     },
     "python.pythonPath": "/usr/bin/python3"
 }
