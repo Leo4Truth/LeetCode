@@ -9,9 +9,23 @@
 
 using namespace std;
 
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int _val) : val(_val), next(nullptr) {}
+};
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int _val) : val(_val), left(nullptr), right(nullptr) {}
+};
+
 class Solution {
 public:
-
 
 };
 
@@ -22,7 +36,6 @@ int main(int argc, char* argv[]) {
     string s2 = argc >= 3 ? argv[2] : "";
 
     Solution solution;
-
-    //system("pause");
+    
     return 0;
 }

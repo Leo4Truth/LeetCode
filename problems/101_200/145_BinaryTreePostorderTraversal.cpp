@@ -27,6 +27,7 @@ public:
             }
             node = stk.top();
             stk.pop();
+            
         }
     }
 };
