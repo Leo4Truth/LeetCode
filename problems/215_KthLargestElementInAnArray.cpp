@@ -3,11 +3,8 @@
 
 using namespace std;
 
-class Solution215 {
+class Solution {
 public:
-    /**
-     * Quick Selct
-     */
     void swap(vector<int>& nums, int i, int j) {
         int tmp = nums[i];
         nums[i] = nums[j];
@@ -35,29 +32,22 @@ public:
         return 0;
     }
 
-    int findKthLargest_quickSelect(vector<int>& nums, int k) {
+    int findKthLargest(vector<int>& nums, int k) {
         return select(nums, 0, nums.size() - 1, k);
     }
-
-    /**
-     * Heap Sort
-     */
-    
 };
 
 int main(int argc, char* argv[]) {
-    int n = argc >= 2 ? stoi(argv[1]) : 5;
-    int k = argc >= 3 ? stoi(argv[2]) : 3;
+    int n = argc >= 2 ? stoi(argv[1]) : 10;
+    int k = argc >= 3 ? stoi(argv[2]) : 1;
     vector<int> nums;
     for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        nums.push_back(x);
+        nums.push_back(i);
+        cout << nums[i];
+        if (i < n - 1) cout << ", ";
     }
-
-    Solution215 solution;
+    cout << endl;
+    Solution solution;
     cout << solution.findKthLargest(nums, k) << endl;
-
-    //system("pause");
     return 0;
 }
