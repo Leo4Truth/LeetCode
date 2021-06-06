@@ -12,5 +12,4 @@
         "string_view": "cpp",
         "new": "cpp"
     },
-    "python.pythonPath": "/usr/bin/python3",
 }
