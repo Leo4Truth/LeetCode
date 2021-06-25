@@ -30,7 +30,7 @@
 			"class Solution {",
 			"public:",
 			"\t$0", //最终光标会在这里等待输入
-			"}",
+			"};",
 			"",
 			"int main(int argc, char* argv[]) {",
 			"",

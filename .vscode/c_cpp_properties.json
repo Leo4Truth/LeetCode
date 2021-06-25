@@ -15,6 +15,22 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.18362.0"
+        },
+        {
+            "name": "wsl",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
+            "defines": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ]
+            }
         }
     ],
     "version": 4
