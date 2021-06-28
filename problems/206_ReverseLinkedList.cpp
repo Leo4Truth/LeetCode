@@ -13,8 +13,23 @@ struct ListNode {
     ListNode(int v, ListNode* n) : val(v), next(n) {}
 };
 
-class Solution206 {
+class Solution {
 public:
+    ListNode* reverseList_21_6_27(ListNode* head) {
+        if (!head) return nullptr;
+        if (!head->next) return head;
+        ListNode* curr = head;
+        ListNode* prev = nullptr;
+        ListNode* next = head->next;
+        while (curr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
     ListNode* reverseList(ListNode* head) {
         ListNode* curr = head;
         ListNode* prev = nullptr;
@@ -43,7 +58,7 @@ int main(int argc, char* argv[]) {
     n4->next = n5;
     n5->next = n6;
 
-    Solution206 solution;
+    Solution solution;
     ListNode* p = solution.reverseList(n1);
     while (p) {
         cout << p->val;

@@ -4,10 +4,10 @@
 
 using namespace std;
 
-class Solution3 {
+class Solution {
 public:
-    // Set
-    int lengthOfLongestSubstring(string s) {
+    // Sliding Window, Set
+    int lengthOfLongestSubstring_set(string s) {
         int l = 0, r = 0;
         int len = s.length();
         unordered_set<char> set;
@@ -24,7 +24,24 @@ public:
         return max;
     }
 
-	// 
+	// Sliding Window, Map
+	int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        if (n == 0) return 0;
+        unordered_map<char, int> map;
+        int l = 0, r = 0;
+        int max = 0;
+        while (l < n && r < n) {
+            if (!map.count(s[r]) || map[s[r]] == 0) {
+                map[s[r++]] = 1;
+                max = r - l > max ? r - l : max;
+            }
+            else map[s[l++]] = 0;
+        }
+        return max;
+    }
+
+	// Sliding Window
 	int lengthOfLongestSubstring(string s) {
 		if (s.empty()) return 0;
 
@@ -60,8 +77,8 @@ public:
 	}
 };
 
-int main3() {
-	Solution3 solution;
+int main() {
+	Solution solution;
 	string s;
 	cin >> s;
 	cout << solution.lengthOfLongestSubstring(s) << endl;

@@ -11,8 +11,54 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution25 {
+class Solution {
 public:
+	ListNode* reverseKGroup_21_6_27(ListNode* head, int k) {
+		if (!head) return nullptr;	// empty list
+		if (k == 1) return head;	// k == 1, no operation needed
+		ListNode* node = head;
+		int n = 0;
+		while (node) {
+			n++;
+			node = node->next;
+		}
+		if (n < k) return head;		// length of the list less than k, no operation needed
+		cout << n << endl;
+		int groupNum = n / k;
+		int gn = 0;
+		int kk = 0;
+		ListNode* newHead = nullptr;
+		ListNode* prevGroupTail = nullptr;
+		ListNode* groupTail = nullptr;
+		ListNode* prev = nullptr;
+		ListNode* curr = head;
+		ListNode* next = nullptr;
+		while (true) {
+			kk++;
+			if (kk == 1) {
+				prevGroupTail = groupTail;
+				groupTail = curr;
+			}
+			else if (kk == k) {
+				if (!newHead) newHead = curr;
+				if (prevGroupTail) {
+					prevGroupTail->next = curr;
+				}
+				gn++;
+				kk = 0;
+			}
+			next = curr->next;
+			curr->next = prev;
+			prev = curr;
+			curr = next;
+			if (gn == groupNum) {
+				groupTail->next = curr;
+				return newHead;
+			}
+		}
+		return newHead;
+	}
+
 	ListNode* reverseKGroup(ListNode* head, int k) {
 		// return if there is less than k nodes in the list
 		int i = 0;
@@ -56,8 +102,8 @@ public:
 	}
 };
 
-int main25() {
-	Solution25 solution;
+int main() {
+	Solution solution;
 	int n, k;
 	ListNode* head = NULL;
 	ListNode* current = NULL;
@@ -82,7 +128,7 @@ int main25() {
 	cout << "input k:" << endl;
 	cin >> k;
 
-	ListNode* h = solution.reverseKGroup(head, k);
+	ListNode* h = solution.reverseKGroup_21_6_27(head, k);
 	for (ListNode* p = h; p; p = p->next) {
 		cout << p->val;
 		if (p->next) cout << ", ";
