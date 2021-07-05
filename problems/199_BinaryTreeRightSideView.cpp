@@ -23,9 +23,7 @@ public:
     }
     vector<int> rightSideView(TreeNode* root) {
         if (!root) return {};
-
         vector<int> res;
-
         vector<vector<int>> levelOrder = vector<vector<int>>();
     	// empty tree
     	if (!root) return res;

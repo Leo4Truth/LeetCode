@@ -3,8 +3,34 @@
 
 using namespace std;
 
-class Solution33 {
+class Solution {
 public:
+    int search_21_6_29(vector<int>& nums, int target) {
+        int n = nums.size();
+        if (n == 0) return -1;
+        if (n == 1) return nums[0] == target ? 0 : -1;
+        int l = 0, r = n - 1;
+        while (l <= r) {
+            int mid = (l + r) / 2;c
+            if (nums[mid] == target) return mid;
+            // 左半边有序
+            if (nums[0] <= nums[mid]) {
+                // 若target在左半边范围中, 则下一轮循环搜索左半边
+                if (nums[0] <= target && target < nums[mid]) r = mid - 1;
+                // 否则下一轮循环搜索右半边
+                else l = mid + 1;
+            }
+            // 左半边无序, 则右半边必定有序
+            else {
+                // 若target在右半边范围中，则下一轮循环搜索右半边
+                if (nums[mid] < target && target <= nums[r]) l = mid + 1;
+                // 否则下一轮循环搜索左半边
+                else r = mid - 1;
+            }
+        }
+        return -1;
+    }
+
     // time limit O(logN)
     int search(vector<int>& nums, int target) {
         int n = nums.size();
@@ -29,7 +55,7 @@ public:
     }
 };
 
-int main33() {
+int main() {
     vector<int> nums;
     int n, x, target;
     cout << "input size of the array: " << endl;

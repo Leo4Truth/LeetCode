@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 
 using namespace std;
@@ -7,6 +8,38 @@ using namespace std;
 class Solution40 {
 public:
     // No duplicate elements in any result
+
+    // dfs
+    // Pass
+    // Time:  4 ms,    defeat 92.94%
+    // Space: 10.3 MB, defeat 78.35%
+    vector<vector<int>> combinationSum2_dfs(vector<int>& candidates, int target) {
+        int n = candidates.size();
+        if (n == 0) return {};
+        vector<vector<int>> res;
+        unordered_map<int, int> map;
+        for (int i = 0; i < n; i++) map[candidates[i]]++;
+        vector<int> current;
+        dfs(map, target, current, res);
+        return res;
+    }
+
+    void dfs(unordered_map<int, int>& map, int target, vector<int>& current, vector<vector<int>>& res) {
+        if (target == 0) {
+            res.push_back(current);
+            return;
+        }
+        for (auto entry : map) {
+            if (entry.first <= target && entry.second > 0 && 
+                (current.empty() || entry.first >= current.back())) { // To ensure no duplicate, make each combination ascending order
+                current.push_back(entry.first);
+                map[entry.first]--;
+                dfs(map, target - entry.first, current, res);
+                map[entry.first]++;
+                current.pop_back();
+            }
+        }
+    }
 
     // solution 1, origin, time faster than 46%
     /*
