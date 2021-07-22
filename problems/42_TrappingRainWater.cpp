@@ -4,8 +4,28 @@
 
 using namespace std;
 
-class Solution42 {
+class Solution {
 public:
+    // mono stack
+    int trap_stack_21_07_21(vector<int>& height) {
+        if (height.size() == 0 || height.size() == 1) return 0;
+        stack<int> stk;
+        int sum = 0;
+        int current = 0;
+        while (current < height.size()) {
+            while (!stk.empty() && height[stk.top()] < height[current]) {
+                int top = stk.top();
+                stk.pop();
+                if (stk.empty()) break;
+                int d = current - stk.top() - 1;
+                int bound_height = (height[current] < height[stk.top()] ? height[current] : height[stk.top()]) - height[top];
+                sum += d * bound_height;
+            }
+            stk.push(current++);
+        }
+        return sum;
+    }
+
     int trap_doublePointers(vector<int>& height) {
         if (height.size() == 0 || height.size() == 1) return 0;
         int leftMax = 0, rightMax = height.size() - 1;
@@ -60,8 +80,8 @@ public:
     }
 };
 
-int main42() {
-    Solution42 solution;
+int main() {
+    Solution solution;
     int n;
     vector<int> height;
     cin >> n;
