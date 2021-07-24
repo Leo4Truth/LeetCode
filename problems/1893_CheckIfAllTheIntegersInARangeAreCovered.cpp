@@ -29,11 +29,16 @@ public:
         return true;
     }
     
-    // TODO: 
+    // brute force
+    // sort
     bool isCovered(vector<vector<int>>& ranges, int left, int right) {
-        int n = ranges.size();
-        if (n == 0) return false;
-        return true;
+        sort(ranges.begin(), ranges.end());
+        for (auto range : ranges) {
+            if (range[0] > left) return false;
+            left = range[1] >= left ? range[1] + 1 : left;
+            if (left > right) return true;
+        }
+        return left > right;
     }
 };
 
