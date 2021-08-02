@@ -24,6 +24,8 @@ public:
 
         vector<int> dist(n, inf);
         dist[k - 1] = 0;
+        // pair<int, int> p
+        // p.first distance, p.second index
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> q;
         q.emplace(0, k - 1);
         while (!q.empty()) {
