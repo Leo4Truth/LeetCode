@@ -16,6 +16,8 @@ public:
     // d[i] represents the smallest last element in ascending sequence with length i
     // len records the length of the ascending sequence length
     // d[i] is monotonically increasing
+    // Time Complexity: O(NlogN)
+    // Space Complexity: O(N)
     int lengthOfLIS_greedy_binary(vector<int>& nums) {
         int n = nums.size();
         if (n == 0) return 0;
