@@ -12,6 +12,11 @@ public:
         return bfs(blocked, source, target) && bfs(blocked, target, source);
     }
 
+    // BFS until 
+    // 1. reach the target (true) OR
+    // 2. no place to go (false) OR
+    // 3. get out of the max area the blocked squares can cover (true)
+    // only care whether we can reach the target from the source, so no need to record path
     bool bfs(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target) {
         int m = blocked.size();
         /**
