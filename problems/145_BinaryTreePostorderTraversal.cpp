@@ -17,18 +17,28 @@ struct TreeNode {
 class Solution145 {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> res;
+        if (!root) return res;
+
         stack<TreeNode*> stk;
-        TreeNode* node = root;
-        while (node || !stk.empty()) {
-            while (node) {
-                if (node->right) stk.push(node->right);
-                stk.push(node);
-                node = node->left;
+        TreeNode* prev = nullptr;
+        while (root || !stk.empty()) {
+            while (root) {
+                stk.emplace(root);
+                root = root->left;
             }
-            node = stk.top();
+            root = stk.top();
             stk.pop();
-            
+            if (!root->right || root->right == prev) {
+                res.emplace_back(root->val);
+                prev = root;
+                root = nullptr;
+            } else {
+                stk.emplace(root);
+                root = root->right;
+            }
         }
+        return res;
     }
 };
 
@@ -39,6 +49,14 @@ int main(int argc, char* argv[]) {
     TreeNode* n4 = new TreeNode(4);
     TreeNode* n5 = new TreeNode(5);
 
+    /**
+     *      1
+     *     / \
+     *    2   3
+     *       / \
+     *      4   5
+     * post order traversal: [2, 4, 5, 3, 1]
+     */
     n1->left = n2;
     n1->right = n3;
     n3->left = n4;
@@ -54,7 +72,6 @@ int main(int argc, char* argv[]) {
         if (i < postorder.size() - 1) cout << ",";
     }
     cout << "]" << endl;
-
-    //system("pause");
+    
     return 0;
 }

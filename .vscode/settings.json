@@ -54,7 +54,10 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "thread": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "__node_handle": "cpp",
+        "stack": "cpp",
+        "__split_buffer": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
 }
