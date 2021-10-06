@@ -34,7 +34,7 @@ public:
             // 1. the max move steps needed between A and B is max(sum[i]), i = 0, 1, ..., n-1
             // 2. if one machine in a group has too much clothes to move out to both sides,
             //    then it needs at most max(num), i = 0, 1, ..., n-1 move steps
-            // so the final anser of the problem is the larger one in above two
+            // so the final anser o                                                                                                                                                                                                                                                                                                                                                 f the problem is the larger one in above two
             res = max(res, max(abs(sum), num));
         }
 
