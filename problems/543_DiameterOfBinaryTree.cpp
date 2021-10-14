@@ -28,8 +28,8 @@ public:
         if (!root) return 0;
         int ldepth = depth(root->left);
         int rdepth = depth(root->right);
-        current = max(current, ldepth + rdepth + 1);
-        return max(root->left, root->right) + 1;
+        current = max(current, ldepth + rdepth);
+        return max(ldepth, rdepth) + 1;
     }
 
 private:
