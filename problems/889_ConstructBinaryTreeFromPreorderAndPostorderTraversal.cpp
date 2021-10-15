@@ -21,28 +21,36 @@ class Solution {
 public:
     TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
         int n = preorder.size();
-        if (n == 0) return nullptr;
+        if (n == 0 || n != postorder.size()) return nullptr;
+        // entry of the recursive call
         return _constructFromPrePost(preorder, 0, n - 1, postorder, 0, n - 1);
     }
 
 private:
-    /**
-     * 1 2 4 5 3 6 7
-     * 7
-     */
     TreeNode* _constructFromPrePost(vector<int>& preorder, int pre_l, int pre_r, vector<int>& postorder, int post_l, int post_r) {
-        if (pre_l > pre_r || post_l > post_r) return nullptr;
-        if (pre_l == pre_r) return new TreeNode(preorder[pre_l]);
         int n = preorder.size();
-        TreeNode* root = new TreeNode(preorder[pre_l]);
-        int left_root_val = preorder[pre_l + 1];
-        int right_root_val = postorder[post_r - 1];
-        int pre_right_l = pre_l + 1;
-        int post_left_r = post_r - 1;
-        while (preorder[pre_right_l] != left_root_val) pre_right_l++;
-        while (postorder[post_left_r] != right_root_val) post_left_r--;
-        root->left = _constructFromPrePost(preorder, pre_l + 1, pre_right_l - 1, postorder, post_left_r + 1, post_r);
-        root->right = _constructFromPrePost(preorder, pre_right_l, pre_r, postorder, post_l, post_left_r);
+        // return nullptr if any argument is invalid
+        if (pre_l < 0 || pre_r >= n || post_l < 0 || post_r >= n) return nullptr;
+        if (pre_l > pre_r || post_l > post_r) return nullptr;
+        if (pre_r - pre_l != post_r - post_l) return nullptr;
+
+        TreeNode* root =  new TreeNode(preorder[pre_l]);
+        if (pre_l == pre_r) return root;
+        int left_val = preorder[pre_l + 1];
+        int right_val = postorder[post_r - 1];
+        // have only one child
+        if (left_val == right_val) {
+            root->left = _constructFromPrePost(preorder, pre_l + 1, pre_r, postorder, post_l, post_r - 1);
+            return root;
+        }
+        int pre_right_root_idx = pre_l + 1;
+        int post_left_root_idx = post_r - 1;
+        cout << left_val << " " << right_val << endl;
+        cout << pre_right_root_idx << " " << post_left_root_idx << endl;
+        while (preorder[pre_right_root_idx] != right_val) pre_right_root_idx++;
+        while (postorder[post_left_root_idx] != left_val) post_left_root_idx--;
+        root->left = _constructFromPrePost(preorder, pre_l + 1, pre_right_root_idx - 1, postorder, post_l, post_left_root_idx);
+        root->right = _constructFromPrePost(preorder, pre_right_root_idx, pre_r, postorder, post_left_root_idx + 1, post_r - 1);
         return root;
     }
 };
