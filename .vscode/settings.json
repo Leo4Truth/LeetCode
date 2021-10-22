@@ -57,7 +57,8 @@
         "typeinfo": "cpp",
         "__node_handle": "cpp",
         "stack": "cpp",
-        "__split_buffer": "cpp"
+        "__split_buffer": "cpp",
+        "__tree": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
 }
