@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <queue>
 #include <deque>
@@ -15,7 +16,8 @@ struct ListNode {
     int val;
     ListNode* next;
     ListNode() : val(0), next(nullptr) {}
-    ListNode(int _val) : val(_val), next(nullptr) {}
+    ListNode(int val) : val(val), next(nullptr) {}
+    ListNode(int val, ListNode* next) : val(val), next(next) {}
 };
 
 struct TreeNode {
@@ -23,7 +25,8 @@ struct TreeNode {
     TreeNode* left;
     TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int _val) : val(_val), left(nullptr), right(nullptr) {}
+    TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
+    TreeNode(int val, TreeNode* left, TreeNode* right) : val(val), left(left), right(right) {}
 };
 
 class Solution {
