@@ -3,9 +3,16 @@
 
 using namespace std;
 
-class Solution75 {
+class Solution {
 public:
-    void sortColors_countingSort(vector<int>& nums) {
+    virtual void sortColors(vector<int>& nums) {
+        return;
+    }
+};
+
+class Solution_countingSort : public Solution {
+public:
+    void sortColors(vector<int>& nums) {
         int cnt0 = 0, cnt1 = 0;
         for (int i = 0; i < nums.size(); i++) {
             cnt0 += nums[i] == 0 ? 1 : 0;
@@ -17,7 +24,10 @@ public:
             else nums[i] = 2;
         }
     }
+};
 
+class Solution_slide_window : public Solution {
+public:
     // li                       r
     // 0 2 0 1 0 1 0 1 2 1 2 0 1
 
@@ -42,18 +52,25 @@ public:
     }
 };
 
-int main75() {
-    Solution75 solution;
-    int n;
-    cin >> n;
+int main(int argc, char* argv[]) {
+    int n = argc >= 2 ? stoi(argv[1]) : 0;
     vector<int> nums;
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
-        cout << x;
+        if (x > 2) x = 2;
+        if (x < 0) x = 0;
         nums.push_back(x);
     }
-    solution.sortColors(nums);
-    system("pause");
+
+    Solution *solution = new Solution_slide_window();
+    solution->sortColors(nums);
+    cout << "[";
+    for (int i = 0; i < n; i++) {
+        cout << nums[i];
+        if (i < n - 1) cout << ",";
+    }
+    cout << "]" << endl;
+    
     return 0;
 }
