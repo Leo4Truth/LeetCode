@@ -60,7 +60,6 @@ public:
                 t2 = events[j][1];
                 v2 = events[j][2];
                 if (s2 > t1) max = v1 + v2 > max ? v1 + v2 : max;
-                else break;
             }
         }
 
