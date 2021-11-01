@@ -18,6 +18,8 @@ public:
  * @brief One Way BFS
  * because only [0, 1000] valid, use a vector<bool> visited to record whether a num is visited
  * I use a unordered_map<int, int> (or unordered_set<int> equally), though can also have correct anwser, got LTE at cae 41
+ * 执行用时: 44 ms, 在所有 C++ 提交中击败了100.00%的用户
+ * 内存消耗: 8.5 MB, 在所有 C++ 提交中击败了100.00%的用户
  */
 class Solution_oneWayBFS : public Solution {
 public:
@@ -74,9 +76,10 @@ public:
 };
 
 /**
- * @brief One Way BFS
- * because only [0, 1000] valid, use a vector<bool> visited to record whether a num is visited
- * I use a unordered_map<int, int> (or unordered_set<int> equally), though can also have correct anwser, got LTE at cae 41
+ * @brief Two Way BFS
+ * MUST sort nums!
+ * 执行用时: 56 ms, 在所有 C++ 提交中击败了100.00%的用户
+ * 内存消耗: 9 MB, 在所有 C++ 提交中击败了20.00%的用户
  */
 class Solution_twoWayBFS : public Solution {
 public:
@@ -86,102 +89,93 @@ public:
         int n = nums.size();
         if (n == 0) return -1;
 
-        //unordered_map<int, int> forwardMinOp;
-        //unordered_map<int, int> backwardMinOp;
-        //forwardMinOp[start] = 0;
-        //backwardMinOp[goal] = 0;
+        // key key key wtf
+        sort(nums.begin(), nums.end());
+        
+        // need to record the distance of every visited num from start or goal
         vector<int> distanceFromStart(1005, -1);
         vector<int> distanceFromGoal(1005, -1);
-        if (start >= 0 && start <= 1000) distanceFromStart[start] = 0;
-        if (goal >= 0 && goal <= 1000) distanceFromGoal[start] = 0;
 
         // curr, op
-        queue<pair<int, int>> forwardQ;
-        queue<pair<int, int>> backwardQ;
-        forwardQ.push(make_pair(start, 0));
-        backwardQ.push(make_pair(goal, 0));
+        queue<int> forwardQ;
+        queue<int> backwardQ;
+        forwardQ.push(start);
+        backwardQ.push(goal);
         while (!forwardQ.empty() && !backwardQ.empty()) {
             if (forwardQ.size() <= backwardQ.size()) {
                 // forward
-                int curr = forwardQ.front().first;
-                int op = forwardQ.front().second;
+                int curr = forwardQ.front();
                 forwardQ.pop();
+                // op count (distance) from start to current num
+                int op = curr == start ? 0 : distanceFromStart[curr];
                 
                 for (int i = 0; i < n; i++) {
                     int next = curr + nums[i];
-                    //if (backwardMinOp.count(next) == 1) return op + 1 + backwardMinOp[next];
                     if (next == goal) return op + 1;
-                    if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
-                    //if (next >= 0 && next <= 1000 && (forwardMinOp.count(next) == 0 || forwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        forwardQ.push(make_pair(next, op + 1));
-                        //forwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
+                        if (distanceFromStart[next] == -1) {
+                            forwardQ.push(next);
+                            distanceFromStart[next] = op + 1;
+                        }
                     }
                     
                     next = curr - nums[i];
-                    //if (backwardMinOp.count(next) == 1) return op + 1 + backwardMinOp[next];
                     if (next == goal) return op + 1;
-                    if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
-                    //if (next >= 0 && next <= 1000 && (forwardMinOp.count(next) == 0 || forwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        forwardQ.push(make_pair(next, op + 1));
-                        //forwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
+                        if (distanceFromStart[next] == -1) {
+                            forwardQ.push(next);
+                            distanceFromStart[next] = op + 1;
+                        }
                     }
                     
                     next = curr ^ nums[i];
-                    //if (backwardMinOp.count(next) == 1) return op + 1 + backwardMinOp[next];
                     if (next == goal) return op + 1;
-                    if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
-                    //if (next >= 0 && next <= 1000 && (forwardMinOp.count(next) == 0 || forwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        forwardQ.push(make_pair(next, op + 1));
-                        //forwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromGoal[next] != -1) return op + 1 + distanceFromGoal[next];
+                        if (distanceFromStart[next] == -1) {
+                            forwardQ.push(next);
+                            distanceFromStart[next] = op + 1;
+                        }
                     }
                 }
             } else {
                 // backward
-                int curr = backwardQ.front().first;
-                int op = backwardQ.front().second;
+                int curr = backwardQ.front();
                 backwardQ.pop();
+                // op count (distance) from goal to current num
+                int op = curr == goal ? 0 : distanceFromGoal[curr];
                 
                 for (int i = 0; i < n; i++) {
                     int next = curr + nums[i];
-                    //if (forwardMinOp.count(next) == 1) return op + 1 + forwardMinOp[next];
-                    if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
-                    //if (next >= 0 && next <= 1000 && (backwardMinOp.count(next) == 0 || backwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        backwardQ.push(make_pair(next, op + 1));
-                        //backwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next == start) return op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
+                        if (distanceFromGoal[next] == -1) {
+                            backwardQ.push(next);
+                            distanceFromGoal[next] = op + 1;
+                        }
                     }
                     
                     next = curr - nums[i];
-                    //if (forwardMinOp.count(next) == 1) return op + 1 + forwardMinOp[next];
-                    if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
-                    //if (next >= 0 && next <= 1000 && (backwardMinOp.count(next) == 0 || backwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        backwardQ.push(make_pair(next, op + 1));
-                        //backwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next == start) return op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
+                        if (distanceFromGoal[next] == -1) {
+                            backwardQ.push(next);
+                            distanceFromGoal[next] = op + 1;
+                        }
                     }
                     
                     next = curr ^ nums[i];
-                    //if (forwardMinOp.count(next) == 1) return op + 1 + forwardMinOp[next];
-                    if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
-                    //if (next >= 0 && next <= 1000 && (backwardMinOp.count(next) == 0 || backwardMinOp[next] > op + 1)) {
-                    if (next >= 0 && next <= 1000 && distanceFromStart[next] == -1) {
-                        cout << next << ", " << (op + 1) << endl;
-                        backwardQ.push(make_pair(next, op + 1));
-                        //backwardMinOp[next] = op + 1;
-                        distanceFromStart[next] = op + 1;
+                    if (next == start) return op + 1;
+                    if (next >= 0 && next <= 1000) {
+                        if (distanceFromStart[next] != -1) return op + 1 + distanceFromStart[next];
+                        if (distanceFromGoal[next] == -1) {
+                            backwardQ.push(next);
+                            distanceFromGoal[next] = op + 1;
+                        }
                     }
                 }
             }
