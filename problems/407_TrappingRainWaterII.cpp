@@ -78,9 +78,46 @@ public:
         int n = heightMap[0].size();
         if (n <= 2) return 0;
 
-        // TODO
+        int dirs[] = {-1, 0, 1, 0, -1};
 
-        return 0;
+        int maxHeight = 0;
+        for (int i = 0; i < m; ++i) maxHeight = max(maxHeight, *max_element(heightMap[i].begin(), heightMap[i].end()));
+
+        vector<vector<int>> water(m, vector<int>(n, maxHeight));
+        queue<pair<int,int>> q;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || i == m - 1 || j == 0 || j == n - 1) {
+                    if (water[i][j] > heightMap[i][j]) {
+                        water[i][j] = heightMap[i][j];
+                        q.push(make_pair(i, j));
+                    }
+                }
+            }
+        }
+        while (!q.empty()) {
+            int x = q.front().first;
+            int y = q.front().second;
+            q.pop();
+            for (int k = 0; k < 4; k++) {
+                int nx = x + dirs[k];
+                int ny = y + dirs[k + 1];
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+                if (water[x][y] < water[nx][ny] && water[nx][ny] > heightMap[nx][ny]) {
+                    water[nx][ny] = max(water[x][y], heightMap[nx][ny]);
+                    q.push(make_pair(nx, ny));
+                }
+            }
+        }
+        
+        int sum = 0;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                sum += water[i][j] - heightMap[i][j];
+            }
+        }
+
+        return sum;
     }
 };
 
@@ -98,7 +135,12 @@ int main(int argc, char* argv[]) {
         heightMap.push_back(heightRow);
     }
 
-    Solution *solution = new Solution_minHeap();
+    Solution *solution = nullptr;
+    
+    solution = new Solution_minHeap();
+    cout << solution->trapRainWater(heightMap) << endl;
+
+    solution = new Solution_bfs();
     cout << solution->trapRainWater(heightMap) << endl;
 
     return 0;
