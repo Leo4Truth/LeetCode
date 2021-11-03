@@ -11,9 +11,9 @@ struct TreeNode {
     TreeNode(int _val) : val(_val), left(nullptr), right(nullptr) {}
 };
 
-class Solution100 {
+class Solution {
 public:
-    // DFS, recursive
+    // BFS, iterative
     bool isSameTree(TreeNode* p, TreeNode* q) {
         if (p == nullptr && q == nullptr) return true;
         else if (p == nullptr || q == nullptr) return false;
@@ -45,8 +45,8 @@ public:
     }
 };
 
-int main100() {
-    Solution100 solution;
+int main() {
+    Solution solution;
 
     auto* n0 = new TreeNode(0);
     auto* n1 = new TreeNode(1);
