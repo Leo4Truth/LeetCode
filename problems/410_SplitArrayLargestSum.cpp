@@ -46,7 +46,6 @@ int main(int argc, char* argv[]) {
     }
     Solution solution;
     cout << solution.splitArray(nums, m) << endl;;
-
-    //system("pause");
+    
     return 0;
 }
