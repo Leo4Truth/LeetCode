@@ -1,11 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <queue>
-#include <deque>
-#include <stack>
-#include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
 
 using namespace std;
 
@@ -18,7 +12,7 @@ class Solution_math : public Solution {
 public:
     bool divisorGame(int n) {
         return n % 2 == 0;
-        //return !(n&1);
+        // return !(n&1);
     }
 };
 
