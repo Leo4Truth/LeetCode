@@ -9,9 +9,14 @@
 
 using namespace std;
 
-class Solution268 {
+class Solution {
 public:
-    int missingNumber_hashSet(vector<int>& nums) {
+    virtual int missingNumber(vector<int>& nums) = 0;
+};
+
+class Solution_hashSet : public Solution {
+public:
+    int missingNumber(vector<int>& nums) {
         int n = nums.size();
         unordered_set<int> numSet;
         for (int i = 0; i < n; i++) numSet.insert(nums[i]);
@@ -22,6 +27,11 @@ public:
         return -1;
     }
 
+private:
+};
+
+class Solution_bitManipulation : public Solution {
+public:
     // index: 0 1 2 3
     // value: 0 1 3 4
     // missing = n ^ (index1^value1) ^ (index2^value2) ^ ... ^ (indexn^valuen)
@@ -29,11 +39,13 @@ public:
     //         = (0^0)^(1^1)^(3^3)^(4^4)^2
     //         = 0^0^0^0^2
     //         = 2
-    int missingNumber_bitManipulattion(vector<int>& nums) {
+    int missingNumber(vector<int>& nums) {
         int missing = nums.size();
         for (int i = 0; i < nums.size(); i++) missing ^= i ^ nums[i];
         return missing;
     }
+
+private:
 };
 
 int main(int argc, char* argv[]) {
@@ -45,10 +57,14 @@ int main(int argc, char* argv[]) {
         nums.push_back(x);
     }
 
-    Solution268 solution;
-    cout << solution.missingNumber_bitManipulattion(nums) << endl;
+    Solution *solution = nullptr;
+    
+    solution = new Solution_hashSet();
+    cout << "hash set        : " << solution->missingNumber(nums) << endl;
 
-    //system("pause");
+    solution = new Solution_bitManipulation();
+    cout << "bit manipulation: " << solution->missingNumber(nums) << endl;
+
     return 0;
 }
 
