@@ -1,2 +1,6 @@
 */a.exe
 */a.out
+*/debug.log
+./a.exe
+./a.out
+./debug.log
