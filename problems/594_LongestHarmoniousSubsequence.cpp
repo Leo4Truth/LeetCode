@@ -5,9 +5,14 @@
 
 using namespace std;
 
-class Solution594 {
+class Solution {
 public:
-    int findLHS_hashmap(vector<int>& nums) {
+    virtual int findLHS(vector<int>& nums) = 0;
+};
+
+class Solution_hashmap : public Solution {
+public:
+    int findLHS(vector<int>& nums) {
         int n = nums.size();
         if (n < 2) return 0;
 
@@ -21,8 +26,12 @@ public:
 
         return res;
     }
+};
 
-    int findLHS_sort(vector<int>& nums) {
+
+class Solution_sort : public Solution {
+public:
+    int findLHS(vector<int>& nums) {
         int n = nums.size();
         if (n < 2) return 0;
 
@@ -60,8 +69,13 @@ int main(int argc, char* argv[]) {
         nums.push_back(x);
     }
 
-    Solution594 solution;
-    cout << solution.findLHS_sort(nums) << endl;
+    Solution *solution = nullptr;
+    
+    solution = new Solution_hashmap();
+    cout << "hashmap: " << solution->findLHS(nums) << endl;
+    
+    solution = new Solution_sort();
+    cout << "sort   : " << solution->findLHS(nums) << endl;
 
     //system("pause");
     return 0;
