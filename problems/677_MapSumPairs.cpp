@@ -13,7 +13,7 @@ using namespace std;
 
 struct TrieNode {
     int val;
-    TrieNode * next[26];
+    TrieNode *next[26];
     TrieNode() {
         this->val = 0;
         for (int i = 0; i < 26; ++i) {
