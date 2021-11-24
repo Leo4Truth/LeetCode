@@ -11,7 +11,7 @@
 
 using namespace std;
 
-// Definition for a Node.
+// Definition for a Trie Node.
 struct TrieNode {
     int val;
     TrieNode * next[26];
@@ -20,12 +20,6 @@ struct TrieNode {
         for (int i = 0; i < 26; ++i) {
             this->next[i] = nullptr;
         }
-    }
-};
-
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-    children = _children;
     }
 };
 
