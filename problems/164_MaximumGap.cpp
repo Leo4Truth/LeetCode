@@ -14,7 +14,7 @@ using namespace std;
 class Solution {
 public:
     virtual int maximumGap(vector<int>& nums) = 0;
-};
+}; 
 
 class Solution_init : public Solution {
 public:
@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
     Solution *solution = nullptr;
 
     solution = new Solution_init();
+    cout << solution->maximumGap(nums) << endl;
 
     return 0;
 }
