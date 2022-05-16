@@ -38,7 +38,6 @@
                 "${workspaceFolder}/**",
                 "/Library/Developer/CommandLineTools/usr/include/c++/v1",
                 "/usr/local/include",
-                "/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include",
                 "/Library/Developer/CommandLineTools/usr/include"
             ],
             "defines": [],
