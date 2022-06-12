@@ -4,15 +4,35 @@
 #include <deque>
 #include <stack>
 #include <algorithm>
+#include <map>
 #include <unordered_map>
-#include <unordered_set>
 
 using namespace std;
 
 class Solution {
 public:
+    bool makesquare_dfs_prune(vector<int>& matchsticks) {
+        int n = matchsticks.size();
+        if (n < 4) return false;
+        int sum = 0;
+        for (auto x : matchsticks) sum += x;
+        if (sum != sum / 4 * 4) return false;
+        int sideLen = sum / 4;
+        sort(matchsticks.begin(), matchsticks.end());
+        return dfs1(matchsticks, 0, sideLen, 0);
+    }
+
+    bool dfs1(vector<int>& matchsticks, int index, int sideLen, int currentSideLen) {
+        if (index == matchsticks.size()) return true;
+        for (int i = index; i < matchsticks.size(); i++) {
+            
+        }
+        return false;
+    }
+
     // DFS
     // Pass
+    // 2022.06.01: Limited Time Exceeded, need pruning
     bool makesquare_dfs(vector<int>& matchsticks) {
         int n = matchsticks.size();
         if (n < 4) return false;
@@ -83,8 +103,11 @@ int main(int argc, char* argv[]) {
         matchsticks.push_back(x);
     }
 
+    vector<int> new_case = {4,13,1,1,14,15,1,3,13,1,3,5,2,8,12};
+
     Solution solution;
-    cout << solution.makesquare(matchsticks) << endl;
+    cout << "input   : " << solution.makesquare_dfs_prune(matchsticks) << endl;
+    cout << "new case: " << solution.makesquare_dfs_prune(new_case) << endl;
 
     //system("pause");
     return 0;
