@@ -34,9 +34,29 @@ public:
         }
         return res;
     }
+    
+
+    vector<int> solve20240316(TreeNode* root) {
+        vector<int> res;
+        stack<TreeNode*> stk;
+        TreeNode* current = root;
+        while (true) {
+            while (current) {
+                stk.push(current);
+                current = current->left;
+            }
+            if (!stk.empty()) {
+                res.push_back(stk.top()->val);
+                current = stk.top()->right;
+                stk.pop();
+            }
+            else break;
+        }
+        return res;
+    }
 };
 
-int main94() {
+int main() {
     Solution94 solution;
     TreeNode* root;
     TreeNode* n1 = new TreeNode(1);
@@ -52,6 +72,14 @@ int main94() {
         if (i < res.size() - 1) cout << ", ";
     }
     cout << "]" << endl;
-    system("pause");
+    
+    vector<int> res2 = solution.solve20240316(root);
+    cout << "[";
+    for (int i = 0; i < res2.size(); i++) {
+        cout << res2[i];
+        if (i < res2.size() - 1) cout << ", ";
+    }
+    cout << "]" << endl;
+    
     return 0;
 }
