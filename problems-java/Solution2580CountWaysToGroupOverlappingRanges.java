@@ -26,8 +26,4 @@ public class Solution2580CountWaysToGroupOverlappingRanges {
         return res;
     }
 
-    private boolean isOverlap(int[] a, int[] b) {
-        return !(a[1] < b[0]);
-    }
-
 }
