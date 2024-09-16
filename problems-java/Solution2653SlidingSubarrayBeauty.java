@@ -1,7 +1,5 @@
 import java.util.List;
-import java.util.ListIterator;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @link https://leetcode.cn/problems/sliding-subarray-beauty/description/
@@ -101,6 +99,7 @@ public class Solution2653SlidingSubarrayBeauty {
             xx += count[nega];
             if (xx >= x) {
                 result[0] = nega - BIAS;
+                break;
             }
         }
 
@@ -118,6 +117,7 @@ public class Solution2653SlidingSubarrayBeauty {
                 xx += count[nega];
                 if (xx >= x) {
                     result[r - k + 1] = nega - BIAS;
+                    break;
                 }
             }
         }
