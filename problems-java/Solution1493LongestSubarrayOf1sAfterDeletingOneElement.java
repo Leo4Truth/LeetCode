@@ -1,9 +1,11 @@
 /**
- * @link https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/description/?envType=problem-list-v2&envId=7NLUuUun
+ * @link https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/description/
  * 
  * @level middle
  * 
- * 
+ * @tag 滑动窗口
+ * @tag sliding windows
+ * @tag 不定长滑动窗口 - 求最长子数组
  */
 public class Solution1493LongestSubarrayOf1sAfterDeletingOneElement {
 

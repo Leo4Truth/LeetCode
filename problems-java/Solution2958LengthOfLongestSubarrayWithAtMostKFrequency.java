@@ -1,5 +1,15 @@
+import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * @link https://leetcode.cn/problems/length-of-longest-subarray-with-at-most-k-frequency/description/
+ * 
+ * @level middle
+ * 
+ * @tag 滑动窗口
+ * @tag sliding windows
+ * @tag 不定长滑动窗口 - 求最长子数组
+ */
 public class Solution2958LengthOfLongestSubarrayWithAtMostKFrequency {
 
     public int maxSubarrayLength(int[] nums, int k) {
@@ -17,6 +27,29 @@ public class Solution2958LengthOfLongestSubarrayWithAtMostKFrequency {
             right++;
         }
         return ans;
+    }
+
+    /**
+     * 2024-09-18
+     * 
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int maxSubarrayLength1(int[] nums, int k) {
+        int n = nums.length;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        int max = 0;
+        int l = 0;
+        for (int r = 0; r < n; r++) {
+            cnt.put(nums[r], cnt.getOrDefault(nums[r], 0) + 1);
+            while (cnt.getOrDefault(nums[r], 0) > k) {
+                cnt.put(nums[l], cnt.get(nums[l]) - 1);
+                l++;
+            }
+            max = r -l + 1 > max ? r - l + 1 : max;
+        }
+        return max;
     }
 
     public static void main(String[] args) {
