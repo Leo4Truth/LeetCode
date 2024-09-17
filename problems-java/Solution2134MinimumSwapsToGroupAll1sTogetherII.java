@@ -1,8 +1,3 @@
-import java.util.List;
-import java.util.ListIterator;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 /**
  * @link https://leetcode.cn/problems/minimum-swaps-to-group-all-1s-together-ii/
  * 

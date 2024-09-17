@@ -40,5 +40,36 @@ public class Solution2848PointsThatIntersectWithCars {
         }
         return intersectCount;
     }
+    
+    /**
+     * 差分
+     * 时间复杂度: O(n + C)
+     * 空间复杂度: O(n)
+     * 
+     * 
+     * @param nums
+     * @return
+     */
+    public int numberOfPoints3(List<List<Integer>> nums) {
+        int C = 0;
+        for (List<Integer> interval : nums) {
+            C = Math.max(C, interval.get(1));
+        }
+
+        int[] diff = new int[C + 2];
+        for (List<Integer> interval : nums) {
+            ++diff[interval.get(0)];
+            --diff[interval.get(1) + 1];
+        }
+
+        int ans = 0, count = 0;
+        for (int i = 1; i <= C; ++i) {
+            count += diff[i];
+            if (count > 0) {
+                ++ans;
+            }
+        }
+        return ans;
+    }
 
 }
