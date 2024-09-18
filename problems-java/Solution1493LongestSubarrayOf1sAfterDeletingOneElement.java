@@ -25,5 +25,54 @@ public class Solution1493LongestSubarrayOf1sAfterDeletingOneElement {
             }
         }
     }
+    
+    public int longestSubarray1(int[] nums) {
+        int n = nums.length;
+        int longest = 0;
+
+        int cnt1 = 0;
+        int cnt0 = 0;
+        int l = 0;
+        for (int r = 0; r < n; r++) {
+            cnt0 += nums[r] == 0 ? 1 : 0;
+            cnt1 += nums[r] == 1 ? 1 : 0;
+            while (cnt0 > 1) {
+                cnt0 -= nums[l] == 0 ? 1 : 0;
+                cnt1 -= nums[l] == 1 ? 1 : 0;
+                l++;
+            }
+            int len = cnt1;
+            if (cnt0 == 0) {
+                len = cnt1 - 1;
+            }
+            longest = len > longest ? len : longest;
+        }
+
+        return longest;
+    }
+    
+    /**
+     * 在longestSubarray1的基础上优化, 只记录0的数量cnt, 子数组长度用窗口大小计算
+     * 兼容全1和1个0两种情况, 统一在返回时-1
+     * @param nums
+     * @return
+     */
+    public int longestSubarray2(int[] nums) {
+        int n = nums.length;
+        int longest = 0;
+
+        int cnt0 = 0;
+        int l = 0;
+        for (int r = 0; r < n; r++) {
+            cnt0 += nums[r] == 0 ? 1 : 0;
+            while (cnt0 > 1) {
+                cnt0 -= nums[l] == 0 ? 1 : 0;
+                l++;
+            }
+            longest = r - l + 1 > longest ? r - l + 1 : longest;
+        }
+
+        return longest - 1;
+    }
 
 }
