@@ -32,4 +32,20 @@ public class Solution456 {
         return false;
     }
 
+    public boolean find132pattern(int[] nums) {
+        int len = nums.length;
+        LinkedList<Integer> stk = new LinkedList<>();
+        int k = Integer.MIN_VALUE;
+        for (int i = len - 1; i >= 0; i--) {
+            if (nums[i] < k) {
+                return true;
+            }
+            while (!stk.isEmpty() && stk.peek() < nums[i]) {
+                k = Math.max(k, stk.poll());
+            }
+            stk.push(nums[i]);
+        }
+        return false;
+    }
+
 }
