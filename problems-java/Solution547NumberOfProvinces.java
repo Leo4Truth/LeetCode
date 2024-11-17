@@ -1,6 +1,3 @@
-import java.util.Set;
-import java.util.HashSet;
-
 /**
  * @link https://leetcode.cn/problems/number-of-provinces/description/
  * 
