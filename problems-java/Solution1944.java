@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * @link https://leetcode.cn/problems/number-of-visible-people-in-a-queue/description/
  * 
@@ -30,7 +32,7 @@ public class Solution1944 {
     /**
      * faster
      */
-    public int[] canSeePersonsCount(int[] heights) {
+    public int[] canSeePersonsCount1(int[] heights) {
         int n = heights.length;
         int[] ans = new int[n];
         LinkedList<Integer> stk = new LinkedList<>();
@@ -54,7 +56,7 @@ public class Solution1944 {
      * fastest
      * stack implemented by array
      */
-    public int[] canSeePersonsCount(int[] heights) {
+    public int[] canSeePersonsCount2(int[] heights) {
         int n = heights.length;
         int[] ans = new int[n];
         int[] st = new int[n];

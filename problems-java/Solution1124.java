@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+
 /**
  * @link https://leetcode.cn/problems/longest-well-performing-interval/description/
  * @problem 1124. Longest Well-Performing Interval

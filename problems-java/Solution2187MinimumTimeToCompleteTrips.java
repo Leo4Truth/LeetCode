@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @link https://leetcode.cn/problems/minimum-time-to-complete-trips/
  * 

@@ -8,10 +8,10 @@ public class Solution1227AirplaneSeatAssignmentProbability {
     }
 
     public static void main(String[] args) {
-        int n;
+        int n = 5;
         Solution1227AirplaneSeatAssignmentProbability solution = new Solution1227AirplaneSeatAssignmentProbability();
         double p = solution.nthPersonGetsNthSeat(n);
-        System.out.print("n: {}, probability: {}", n, p);
+        System.out.println("n: " + n + ", probability: " + p);
     }
 
 }

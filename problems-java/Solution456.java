@@ -32,7 +32,7 @@ public class Solution456 {
         return false;
     }
 
-    public boolean find132pattern(int[] nums) {
+    public boolean find132pattern1(int[] nums) {
         int len = nums.length;
         LinkedList<Integer> stk = new LinkedList<>();
         int k = Integer.MIN_VALUE;
